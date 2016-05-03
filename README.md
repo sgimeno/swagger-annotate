@@ -20,6 +20,4 @@ $ npm run docs
 ## TODO
 
  + add tests
- + write output to `swagger.json` file
- + add an option to specify input directory
- + add an option to specify output directory
+ + add an option to specify output file

@@ -7,8 +7,18 @@ const doctrine = require('doctrine');
 const yaml = require('js-yaml');
 const merge = require('merge');
 
-let config = Object.assign({}, require('../config'));
-let apiDoc = Object.assign({}, config.apiDoc);
+let apiDoc = {
+  swagger: '2.0',
+  info: {
+    title: null,
+    version: null
+  },
+  paths: {}
+};
+
+var entry = process.argv.slice(2)[0];
+process.stdout.on('error', process.exit);
+
 
 let parser = {
       parseSwaggerHeader: function (data) {
@@ -97,12 +107,13 @@ let buildDocs = (fragments) => {
   });
 }
 
-let files = fs.readdirSync(config.files.src, 'utf-8');
+
+let files = fs.readdirSync(entry, 'utf-8');
 
 files.forEach(file => {
     // Only works with js files, for now
     if ((/\.js$/).test(file)) {
-      readAnnotations(`${config.files.src}/${file}`, (err, docs) => {
+      readAnnotations(`${entry}/${file}`, (err, docs) => {
           assert.ifError(err);
           buildDocs(docs);
       });
@@ -110,4 +121,4 @@ files.forEach(file => {
 });
 
 
-fs.writeFileSync(config.files.dest, JSON.stringify(apiDoc))
+fs.writeFileSync('swagger.json', JSON.stringify(apiDoc))
