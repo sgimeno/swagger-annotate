@@ -8,7 +8,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "bin": {
-    "gulp": "./bin/parser.js"
+    "swagger-annotate": "./bin/parser.js"
   },
   "repository": "git@github.com:sgimeno/swagger-annotate.git",
   "author": "sergi@javascriptstud.io",
