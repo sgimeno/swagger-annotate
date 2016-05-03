@@ -1,5 +1,5 @@
 {
-  "name": "swagger-annotations",
+  "name": "swagger-annotate",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,6 +7,10 @@
     "docs": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "bin": {
+    "gulp": "./bin/parser.js"
+  },
+  "repository": "git@github.com:sgimeno/swagger-annotate.git",
   "author": "sergi@javascriptstud.io",
   "license": "MIT",
   "dependencies": {

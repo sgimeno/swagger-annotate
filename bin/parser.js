@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 'use strict';
 const fs = require('fs');
 const assert = require('assert');
@@ -5,9 +7,9 @@ const doctrine = require('doctrine');
 const yaml = require('js-yaml');
 const merge = require('merge');
 
-let apiDoc = Object.assign({}, require('./config').apiDoc);
+let config = Object.assign({}, require('../config'));
+let apiDoc = Object.assign({}, config.apiDoc);
 
-// Refactor to separate module
 let parser = {
       parseSwaggerHeader: function (data) {
           merge(apiDoc, data);
@@ -35,7 +37,6 @@ let parser = {
                   tags.push(newTag);
               }
           });
-
       },
       parseSwaggerPath: function (data) {
           merge.recursive(apiDoc.paths, data);
@@ -96,18 +97,17 @@ let buildDocs = (fragments) => {
   });
 }
 
-function parseControllers(dir) {
-    let files = fs.readdirSync(dir, 'utf-8');
-    files.forEach(function (f) {
-        // Only works with js files, for now
-        if ((/\.js$/).test(f)) {
-          readAnnotations(`${dir}/${f}`, (err, docs) => {
-              assert.ifError(err);
-              buildDocs(docs);
-          });
-        }
-    });
-}
+let files = fs.readdirSync(config.files.src, 'utf-8');
 
-parseControllers(`${__dirname}/test`);
-console.log(JSON.stringify(apiDoc));
+files.forEach(file => {
+    // Only works with js files, for now
+    if ((/\.js$/).test(file)) {
+      readAnnotations(`${config.files.src}/${file}`, (err, docs) => {
+          assert.ifError(err);
+          buildDocs(docs);
+      });
+    }
+});
+
+
+fs.writeFileSync(config.files.dest, JSON.stringify(apiDoc))
