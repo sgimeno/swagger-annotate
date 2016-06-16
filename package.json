@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "docs": "node bin/cmd.js",
-    "test": "npm run docs test"
+    "test": "node bin/cmd.js test"
   },
   "bin": {
     "swagger-annotate": "./bin/cmd.js"

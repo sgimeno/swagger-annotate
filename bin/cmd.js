@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 'use strict';
 
-const fs = require('fs');
-const assert = require('assert');
+const fs = require('fs')
+const assert = require('assert')
+const validator = require('../lib/validator')()
 
 let apiDoc = {
   swagger: '2.0',
@@ -13,24 +14,36 @@ let apiDoc = {
   paths: {}
 }
 
-const parser = require('../lib/parser')(apiDoc);
+const parser = require('../lib/parser')(apiDoc)
 
-let entry = process.argv.slice(2)[0];
-let files = fs.readdirSync(entry, 'utf-8');
-
-process.stdout.on('error', process.exit);
-
-files.forEach(file => {
+let parseFile = (entry, file) => {
     // Only works with js files, for now
     if ((/\.js$/).test(file)) {
       parser.readAnnotations(`${entry}/${file}`, (err, docs) => {
-          assert.ifError(err);
-          parser.buildDocs(docs);
-      });
+          assert.ifError(err)
+          parser.buildDocs(docs)
+      })
     }
-});
+}
 
-const validator = require('../lib/validator')()
+let entry = process.argv.slice(2)[0];
+let stat = fs.lstatSync(entry)
+let files = []
+
+process.stdout.on('error', process.exit)
+
+if (stat.isDirectory()) {
+  files = fs.readdirSync(entry, 'utf-8')
+  files.forEach(file => {
+    parseFile(entry, file)
+  })
+} else if (stat.isFile()) {
+  parseFile('.', entry)
+}
+
+
+
+
 
 validator.validate(apiDoc)
   .then((isValid) => {
