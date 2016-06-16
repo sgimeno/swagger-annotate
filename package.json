@@ -1,0 +1,21 @@
+{
+  "name": "swagger-annotate",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "docs": "node bin/cmd.js",
+    "test": "npm run docs test"
+  },
+  "bin": {
+    "swagger-annotate": "./bin/cmd.js"
+  },
+  "repository": "git@github.com:FSInvestments/swagger-annotate.git",
+  "author": "sergio@blended.io",
+  "dependencies": {
+    "doctrine": "^1.2.1",
+    "js-yaml": "^3.6.0",
+    "merge": "^1.2.0",
+    "swagger-tools": "^0.10.1"
+  }
+}

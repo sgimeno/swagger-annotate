@@ -1,0 +1,139 @@
+{
+   "info" : {
+      "version" : "1.0.1",
+      "title" : "Swagger Sample App",
+      "contact" : {
+         "email" : "support@swagger.io",
+         "name" : "API Support",
+         "url" : "http://www.swagger.io/support"
+      },
+      "termsOfService" : "http://swagger.io/terms/",
+      "description" : "This is a sample server Petstore server.",
+      "license" : {
+         "url" : "http://www.apache.org/licenses/LICENSE-2.0.html",
+         "name" : "Apache 2.0"
+      }
+   },
+   "produces" : [
+      "application/json"
+   ],
+   "definitions" : {
+      "ApiResponse" : {
+         "properties" : {
+            "message" : {
+               "type" : "string"
+            },
+            "type" : {
+               "type" : "string"
+            },
+            "code" : {
+               "type" : "integer",
+               "format" : "int32"
+            }
+         },
+         "type" : "object"
+      }
+   },
+   "host" : "localhost:8090",
+   "tags" : [
+      {
+         "description" : "Everything about your Pets",
+         "name" : "pet",
+         "externalDocs" : {
+            "url" : "http://swagger.io",
+            "description" : "Find out more"
+         }
+      },
+      {
+         "name" : "other tag"
+      },
+      {
+         "name" : "test",
+         "description" : "just another test"
+      }
+   ],
+   "swagger" : "2.0",
+   "consumes" : [
+      "application/json"
+   ],
+   "paths" : {
+      "/" : {
+         "get" : {
+            "consumes" : [
+               "application/json"
+            ],
+            "description" : "nothing to see here",
+            "tags" : [
+               "test",
+               "pet"
+            ],
+            "summary" : "just a test route",
+            "responses" : {
+               "200" : {
+                  "description" : "successful operation",
+                  "schema" : {
+                     "$ref" : "#/definitions/ApiResponse"
+                  }
+               }
+            },
+            "produces" : [
+               "application/json"
+            ]
+         },
+         "post" : {
+            "consumes" : [
+               "application/json"
+            ],
+            "summary" : "just a test route",
+            "produces" : [
+               "application/json"
+            ],
+            "responses" : {
+               "200" : {
+                  "schema" : {
+                     "$ref" : "#/definitions/ApiResponse"
+                  },
+                  "description" : "successful operation"
+               }
+            },
+            "description" : "nothing to see here",
+            "tags" : [
+               "test"
+            ]
+         }
+      },
+      "/{id}" : {
+         "get" : {
+            "summary" : "just a test route",
+            "responses" : {
+               "200" : {
+                  "schema" : {
+                     "$ref" : "#/definitions/ApiResponse"
+                  },
+                  "description" : "successful operation"
+               }
+            },
+            "produces" : [
+               "application/json"
+            ],
+            "description" : "nothing to see here",
+            "tags" : [
+               "test"
+            ],
+            "parameters" : [
+               {
+                  "in" : "path",
+                  "description" : "just an ID",
+                  "type" : "string",
+                  "name" : "id",
+                  "required" : true
+               }
+            ],
+            "consumes" : [
+               "application/json"
+            ]
+         }
+      }
+   },
+   "basePath" : "/"
+}
