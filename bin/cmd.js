@@ -44,11 +44,11 @@ if (stat.isDirectory()) {
 
 
 
-
-validator.validate(apiDoc)
-  .then((isValid) => {
-    process.stdout.write(JSON.stringify(apiDoc))
-  })
-  .catch((err) => {
-    throw err
-  })
+process.stdout.write(JSON.stringify(apiDoc))
+// validator.validate(apiDoc)
+//   .then((isValid) => {
+//     process.stdout.write(JSON.stringify(apiDoc))
+//   })
+//   .catch((err) => {
+//     throw err
+//   })
