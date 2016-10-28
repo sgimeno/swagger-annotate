@@ -9,8 +9,8 @@
   "bin": {
     "swagger-annotate": "./bin/cmd.js"
   },
-  "repository": "git@github.com:FSInvestments/swagger-annotate.git",
-  "author": "sergio@blended.io",
+  "repository": "git@github.com:sgimeno/swagger-annotate.git",
+  "author": "gimeno.sergio@gmail.com",
   "dependencies": {
     "doctrine": "^1.2.1",
     "js-yaml": "^3.6.0",
